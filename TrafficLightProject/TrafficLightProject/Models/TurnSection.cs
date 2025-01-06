@@ -8,7 +8,7 @@ namespace TrafficLightProject.Models
 {
     internal class TurnSection : Section
     {
-        public TurnSection(int interval, ArrowTurn arrowTurn) : base(interval)
+        public TurnSection(int interval, ArrowTurn arrowTurn) : base (interval)
         { 
            ArrowTurn = arrowTurn;
            Position = GetPosition();

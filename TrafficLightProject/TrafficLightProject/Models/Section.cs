@@ -16,7 +16,15 @@ namespace TrafficLightProject.Models
            TimeIntervalSeconds = timeInterval;
         }
         public Color SectionColor { get; protected set; }
-        public bool IsEnabled { get { return _isEnabled; } set { _isEnabled = value; OnPropertyChanged(nameof(IsEnabled)); } }
+        public bool IsEnabled 
+        { 
+            get { return _isEnabled; } 
+            set 
+            { 
+                _isEnabled = value; 
+                OnPropertyChanged(nameof(IsEnabled)); 
+            } 
+        }
 
         public int TimeIntervalSeconds { get; set; }
         public TrafficLightPosition Position { get; protected set; }

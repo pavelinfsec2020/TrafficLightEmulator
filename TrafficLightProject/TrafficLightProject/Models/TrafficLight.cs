@@ -18,7 +18,8 @@ namespace TrafficLightProject.Models
                 new MainSection (Color.Green, 10),
             };
         }
-        public bool IsActivated { get; set; }
+        public bool IsMainActivated { get; set; }
+        public bool IsTurnActivated { get; set; }
         public MainSection[] MainSections { get; set; }
         public List<TurnSection> TurnSections { get; set; }
 
@@ -57,9 +58,10 @@ namespace TrafficLightProject.Models
 
         public async void ActivateNonStopMode()
         {
-            TurnOffTrafficLight();
-           
-            while (IsActivated)
+            TurnOffTrafficLight();          
+            IsMainActivated = true;
+
+            while (IsMainActivated)
             {
                 var delay = MainSections[1].TimeIntervalSeconds * 1000;
                 MainSections[1].IsEnabled = true;
@@ -67,6 +69,71 @@ namespace TrafficLightProject.Models
                 MainSections[1].IsEnabled = false;
                 await Task.Delay(delay);
             }
+        }
+
+        public void ActivateStandartMode()
+        {
+            TurnOffTrafficLight();
+            IsMainActivated = true;
+
+            while (IsMainActivated)
+            {
+                var redDelay = MainSections[0].TimeIntervalSeconds * 1000;
+                var yellowDelay = MainSections[1].TimeIntervalSeconds * 1000;
+                var greenDelay = MainSections[2].TimeIntervalSeconds * 1000;
+                var blinkingDelay = 700;
+
+                // Загорается красный 
+                StartSection(0, redDelay, blinkingDelay);
+                // Загорается желтый
+                StartSection(1, yellowDelay);
+                // Загорается зеленый 
+                StartSection(2, greenDelay, blinkingDelay);
+            }
+        }
+
+        public async Task<bool> ActivateTurnSection()
+        {
+            if (TurnSections.Any()) 
+                return false;
+           
+            IsTurnActivated = true;
+
+            while (IsTurnActivated)
+            {
+                foreach (var section in TurnSections)
+                {
+                    section.IsEnabled = true;
+                    await Task.Delay(section.TimeIntervalSeconds * 1000);
+                    section.IsEnabled = true;
+                    var turnDelay = (MainSections[0].TimeIntervalSeconds * 1000 ) / 2;
+                    await Task.Delay(turnDelay);
+                }
+            }
+
+            return true;
+        }
+
+        private async void StartSection(int sectionIndex,int mainDelay, int blinkingDelay)
+        {
+            MainSections[sectionIndex].IsEnabled = true;
+            await Task.Delay(mainDelay);
+
+            MainSections[sectionIndex].IsEnabled = false;
+            await Task.Delay(blinkingDelay);
+
+            MainSections[sectionIndex].IsEnabled = true;
+            await Task.Delay(blinkingDelay);
+
+            MainSections[sectionIndex].IsEnabled = false;
+            await Task.Delay(blinkingDelay);
+        }
+
+        private async void StartSection(int sectionIndex, int mainDelay)
+        {
+            MainSections[sectionIndex].IsEnabled = true;
+            await Task.Delay(mainDelay);
+            MainSections[sectionIndex].IsEnabled = false;
         }
 
         public void TurnOffTrafficLight()
