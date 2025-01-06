@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TrafficLightProject.Views.Controls;
 
 namespace TrafficLightProject.Views.Forms
 {
@@ -15,6 +16,9 @@ namespace TrafficLightProject.Views.Forms
         public TrafficLightForm()
         {
             InitializeComponent();
+            this.Controls.Add(new TraffickLightSection(Color.Red));
+            this.Controls.Add(new TraffickLightSection(Color.Yellow));
+            this.Controls.Add(new TraffickLightSection(Color.Green));
         }
     }
 }
