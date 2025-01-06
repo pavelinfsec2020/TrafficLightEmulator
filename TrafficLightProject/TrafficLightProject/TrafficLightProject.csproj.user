@@ -4,6 +4,9 @@
     <Compile Update="Views\Controls\TraffickLightSection.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Update="Views\Controls\TrafficLightGreed.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Update="Views\Forms\ControlPanelForm.cs">
       <SubType>Form</SubType>
     </Compile>

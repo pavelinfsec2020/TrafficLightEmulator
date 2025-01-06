@@ -1,6 +1,6 @@
 ﻿namespace TrafficLightProject.Views.Controls
 {
-    partial class TraffickLightSection
+    partial class TrafficLightGreed
     {
         /// <summary> 
         /// Обязательная переменная конструктора.
@@ -30,8 +30,8 @@
         {
             components = new System.ComponentModel.Container();
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Height = Constants.SECTION_WIDTH;
-            this.Width = Constants.SECTION_WIDTH;
+            this.Height = Constants.SECTION_WIDTH * 9;
+            this.Width = Constants.SECTION_WIDTH * 9;
         }
 
         #endregion
