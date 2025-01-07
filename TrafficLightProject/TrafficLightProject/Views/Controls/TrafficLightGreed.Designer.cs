@@ -30,8 +30,9 @@
         {
             components = new System.ComponentModel.Container();
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Height = Constants.SECTION_WIDTH * 9;
-            this.Width = Constants.SECTION_WIDTH * 9;
+            this.Height = Constants.GREED_WITH;
+            this.Width = Constants.GREED_WITH;
+            this.BackColor = System.Drawing.Color.AliceBlue;
         }
 
         #endregion

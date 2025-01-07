@@ -5,9 +5,14 @@ using System.Data;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
+using System.Runtime.Versioning;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.PropertyGridInternal;
+
+
+using System.Resources;
 
 namespace TrafficLightProject.Views.Controls
 {
@@ -16,23 +21,14 @@ namespace TrafficLightProject.Views.Controls
         private Color _lightColor;
         private readonly Color _borderColor = Color.Gray;
         private readonly Color _backgroundColor = Color.Black;
+        private readonly Image _sectionImage;
         public TraffickLightSection(Color color)
         {
             InitializeComponent();
             _lightColor = color;
+            _sectionImage = Image.FromFile(Constants.SECTION_OFF_IMAGE);
+            this.BackgroundImage = _sectionImage;
         }
-
-        protected override void OnPaint(PaintEventArgs pe)
-        {
-            base.OnPaint(pe);
-
-            var borderPen = new Pen(_borderColor, 10);
-            var backGroundBrush = new SolidBrush(_backgroundColor);
-            var border = new Rectangle(this.Location,this.Size);
-            var backGround = new Rectangle(new Point (this.Location.X + 4, this.Location.Y + 4), new Size (this.Width - 8, this.Height - 8));
-            pe.Graphics.DrawRectangle(borderPen, border);
-            pe.Graphics.FillRectangle(backGroundBrush, backGround);
-        }
-
+               
     }
 }

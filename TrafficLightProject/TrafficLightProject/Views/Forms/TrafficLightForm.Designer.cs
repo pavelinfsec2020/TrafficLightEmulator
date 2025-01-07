@@ -28,10 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(450, 450);
-            this.Text = "Светофор";
+            SuspendLayout();
+            // 
+            // TrafficLightForm
+            // 
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(450, 450);
+            Name = "TrafficLightForm";
+            Text = "Светофор";
+            Load += TrafficLightForm_Load;
+            ResumeLayout(false);
         }
 
         #endregion

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Resources;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -11,7 +12,7 @@ namespace TrafficLightProject.Models
         public MainSection(Color sectionColor, int interval) : base (interval) 
         { 
            SectionColor = sectionColor;
-           Position = GetPosition();
+           Position = GetPosition(); 
         }
 
         public bool HasTimerDisplay { get; set; }
