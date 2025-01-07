@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TrafficLightProject.Models;
+using Color = TrafficLightProject.Models.Color;
 
 namespace TrafficLightProject.Views.Controls
 {
@@ -25,15 +26,15 @@ namespace TrafficLightProject.Views.Controls
 
         private void MatchVievAndModelSections()
         {
-            var redSection = new TraffickLightSection(System.Drawing.Color.Red);
+            var redSection = new TraffickLightSection(Color.Red);
             redSection.Location = new Point(Constants.SECTION_WIDTH, 0);
             this.Controls.Add(redSection);
 
-            var yellowSection = new TraffickLightSection(System.Drawing.Color.Yellow);
+            var yellowSection = new TraffickLightSection(Color.Yellow);
             yellowSection.Location = new Point(Constants.SECTION_WIDTH, Constants.SECTION_WIDTH);
             this.Controls.Add(yellowSection);
 
-            var greenSection = new TraffickLightSection(System.Drawing.Color.Green);
+            var greenSection = new TraffickLightSection(Color.Green);
             greenSection.Location = new Point(Constants.SECTION_WIDTH, Constants.SECTION_WIDTH * 2);
             this.Controls.Add(greenSection);
 

@@ -10,25 +10,38 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.PropertyGridInternal;
-
-
 using System.Resources;
+using TrafficLightProject.Models;
+using Color = TrafficLightProject.Models.Color;
 
 namespace TrafficLightProject.Views.Controls
 {
     public partial class TraffickLightSection : UserControl
     {
-        private Color _lightColor;
-        private readonly Color _borderColor = Color.Gray;
-        private readonly Color _backgroundColor = Color.Black;
-        private readonly Image _sectionImage;
+        private readonly Image _offImage;
+        private readonly Image _onImage;
         public TraffickLightSection(Color color)
         {
             InitializeComponent();
-            _lightColor = color;
-            _sectionImage = Image.FromFile(Constants.SECTION_OFF_IMAGE);
-            this.BackgroundImage = _sectionImage;
+            _offImage = Image.FromFile(Constants.SECTION_OFF_IMAGE);
+            _onImage = GetImageFormColor(color);
+            this.BackgroundImage = _onImage;
         }
-               
+
+        private Image GetImageFormColor(Color color)
+        {
+            switch (color)
+            {
+                case Color.Red:
+                    return Image.FromFile(Constants.SECTION_ON_RED);
+                case Color.Yellow:
+                    return Image.FromFile(Constants.SECTION_ON_YELLOW);
+                case Color.Green:
+                    return Image.FromFile(Constants.SECTION_ON_GREEN);
+                default:
+                    return Image.FromFile(Constants.SECTION_OFF_IMAGE);
+            }
+        }
+
     }
 }
