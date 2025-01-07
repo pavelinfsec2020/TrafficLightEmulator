@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TrafficLightProject.Models
 {
-    internal enum Color
+    public enum Color
     {
        Green,
        Yellow,

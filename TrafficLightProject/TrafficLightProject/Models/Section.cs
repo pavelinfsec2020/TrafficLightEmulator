@@ -8,7 +8,7 @@ using System.Xml.Linq;
 
 namespace TrafficLightProject.Models
 {
-    internal abstract class Section : INotifyPropertyChanged
+    public abstract class Section : INotifyPropertyChanged
     {
         private bool _isEnabled;
         public Section(int timeInterval)

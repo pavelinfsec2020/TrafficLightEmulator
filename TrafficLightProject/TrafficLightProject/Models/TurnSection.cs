@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TrafficLightProject.Models
 {
-    internal class TurnSection : Section
+    public class TurnSection : Section
     {
         public TurnSection(int interval, ArrowTurn arrowTurn) : base (interval)
         { 

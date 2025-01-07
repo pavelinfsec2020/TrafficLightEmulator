@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TrafficLightProject.Models
 {
-    internal enum TrafficLightPosition
+    public enum TrafficLightPosition
     {
         Up, 
         Middle,

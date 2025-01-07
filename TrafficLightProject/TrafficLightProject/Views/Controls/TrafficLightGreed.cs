@@ -7,43 +7,42 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TrafficLightProject.Models;
 
 namespace TrafficLightProject.Views.Controls
 {
     public partial class TrafficLightGreed : UserControl
     {
+        private TrafficLight _trafficLight;
         private Point[,] _locations;
-        private TraffickLightSection[] _mainSections = new TraffickLightSection[] { 
-          new TraffickLightSection(Color.Red), new TraffickLightSection(Color.Yellow), new TraffickLightSection(Color.Green),
-        };
-        public TrafficLightGreed()
+        private Dictionary<MainSection, TraffickLightSection> _sectionControls;
+        public TrafficLightGreed(TrafficLight trafficLight)
         {
+            _trafficLight = trafficLight;
+            MatchVievAndModelSections();
             InitializeComponent();
-            InitLocations();
-            AddMainSectionsToGrid();
         }
 
-        private void InitLocations()
+        private void MatchVievAndModelSections()
         {
-            _locations = new Point[3, 3];
+            var redSection = new TraffickLightSection(System.Drawing.Color.Red);
+            redSection.Location = new Point(Constants.SECTION_WIDTH, 0);
+            this.Controls.Add(redSection);
 
-            for (int i = 0; i < 3; i++)
+            var yellowSection = new TraffickLightSection(System.Drawing.Color.Yellow);
+            yellowSection.Location = new Point(Constants.SECTION_WIDTH, Constants.SECTION_WIDTH);
+            this.Controls.Add(yellowSection);
+
+            var greenSection = new TraffickLightSection(System.Drawing.Color.Green);
+            greenSection.Location = new Point(Constants.SECTION_WIDTH, Constants.SECTION_WIDTH * 2);
+            this.Controls.Add(greenSection);
+
+            _sectionControls = new Dictionary<MainSection, TraffickLightSection>()
             {
-                for (int j = 0; j < 3; j++)
-                {
-                    _locations[i, j] = new Point(j * Constants.SECTION_WIDTH, i * Constants.SECTION_WIDTH);
-                }
-            }    
-        }
-
-        private void AddMainSectionsToGrid()
-        { 
-           for (int i = 0; i < 3; i++)
-           {
-               _mainSections[i].Location = new Point(Constants.SECTION_WIDTH, i * 100);
-                this.Controls.Add(_mainSections[i]);   
-                
-           }
+                { _trafficLight.MainSections.FirstOrDefault(s => s.Position == TrafficLightPosition.Up), redSection},
+                { _trafficLight.MainSections.FirstOrDefault(s => s.Position == TrafficLightPosition.Middle), yellowSection },
+                { _trafficLight.MainSections.FirstOrDefault(s => s.Position == TrafficLightPosition.Down), greenSection}
+            };
         }
     }
 }

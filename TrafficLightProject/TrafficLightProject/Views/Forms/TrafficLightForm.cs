@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using System.Runtime.CompilerServices;
+using TrafficLightProject.Models;
 using TrafficLightProject.Views.Controls;
 
 
@@ -14,10 +7,13 @@ namespace TrafficLightProject.Views.Forms
 {
     public partial class TrafficLightForm : Form
     {
-        public static TrafficLightGreed _trafficLightControl = new TrafficLightGreed();
+        private TrafficLight _trafficLight;
+        private TrafficLightGreed _trafficLightControl;
         public TrafficLightForm()
         {
             InitializeComponent();
+            _trafficLight = new TrafficLight();
+            _trafficLightControl = new TrafficLightGreed(_trafficLight);
             this.Controls.Add(_trafficLightControl);
         }
 
@@ -27,6 +23,17 @@ namespace TrafficLightProject.Views.Forms
             this.Size = size;
             this.FormBorderStyle = FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
+        }
+
+        public TrafficLight ConnectToTrafficLight (string password)
+        {
+            //Можно заморочиться с хешированием пароля и хранить в ресурсах его, но не стал заморачиваться, просто для примера
+            if (password == "Qwerty123456")
+            { 
+               return _trafficLight;
+            }
+
+            return null;
         }
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TrafficLightProject.Models
 {
-    internal enum ArrowTurn
+    public enum ArrowTurn
     {
        Left,
        Right

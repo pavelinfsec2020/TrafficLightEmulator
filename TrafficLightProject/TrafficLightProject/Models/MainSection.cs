@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace TrafficLightProject.Models
 {
-    internal class MainSection : Section
+    public class MainSection : Section
     {
         public MainSection(Color sectionColor, int interval) : base (interval) 
         { 

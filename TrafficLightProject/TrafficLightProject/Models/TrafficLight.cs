@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TrafficLightProject.Models
 {
-    internal class TrafficLight
+    public class TrafficLight
     {
         public TrafficLight()
         {
