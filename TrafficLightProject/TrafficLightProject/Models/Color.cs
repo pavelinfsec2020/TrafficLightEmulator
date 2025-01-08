@@ -10,6 +10,8 @@ namespace TrafficLightProject.Models
     {
        Green,
        Yellow,
-       Red
+       Red,
+       Green_Left_Arrow,
+       Green_Right_Arrow,
     }
 }

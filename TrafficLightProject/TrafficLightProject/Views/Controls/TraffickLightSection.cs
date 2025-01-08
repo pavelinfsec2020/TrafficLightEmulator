@@ -24,7 +24,7 @@ namespace TrafficLightProject.Views.Controls
         public TraffickLightSection(Color color)
         {
             InitializeComponent();
-            _offImage = Image.FromFile(Constants.SECTION_OFF_IMAGE);
+            _offImage = Constants.SECTION_OFF_IMAGE;
             _onImage = GetImageFormColor(color);
         }
 
@@ -43,13 +43,17 @@ namespace TrafficLightProject.Views.Controls
             switch (color)
             {
                 case Color.Red:
-                    return Image.FromFile(Constants.SECTION_ON_RED);
+                    return Constants.SECTION_ON_RED;
                 case Color.Yellow:
-                    return Image.FromFile(Constants.SECTION_ON_YELLOW);
+                    return Constants.SECTION_ON_YELLOW;
                 case Color.Green:
-                    return Image.FromFile(Constants.SECTION_ON_GREEN);
+                    return Constants.SECTION_ON_GREEN;
+                case Color.Green_Left_Arrow:
+                    return Constants.SECTION_TURN_LEFT;
+                case Color.Green_Right_Arrow:
+                    return Constants.SECTION_TURN_RIGHT;
                 default:
-                    return Image.FromFile(Constants.SECTION_OFF_IMAGE);
+                    return Constants.SECTION_OFF_IMAGE;
             }
         }
 

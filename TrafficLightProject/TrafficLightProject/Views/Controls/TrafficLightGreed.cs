@@ -33,10 +33,15 @@ namespace TrafficLightProject.Views.Controls
 
         private void RenderTurnSections()
         {
-            var yellowSectionView1 = new TraffickLightSection(Color.Yellow);
-            yellowSectionView1.Location = new Point(0, Constants.SECTION_WIDTH * 2);
-            yellowSectionView1.DataBindings.Add("IsEnabled", yellowSectionView1, "IsEnabled", true, DataSourceUpdateMode.OnPropertyChanged);
-            this.Controls.Add(yellowSectionView1);
+            foreach (var turnSectionModel in _turnSections)
+            {
+                var isLeftTurn = turnSectionModel.ArrowTurn == ArrowTurn.Left;
+                var turnSectionView = new TraffickLightSection(isLeftTurn ? Color.Green_Left_Arrow :
+                                                                            Color.Green_Right_Arrow);
+                turnSectionView.Location = new Point( isLeftTurn ? 0:  Constants.SECTION_WIDTH * 2, Constants.SECTION_WIDTH * 2);
+                turnSectionView.DataBindings.Add("IsEnabled", turnSectionView, "IsEnabled", true, DataSourceUpdateMode.OnPropertyChanged);
+                this.Controls.Add(turnSectionView);
+            }
         }
 
         /// <summary>
