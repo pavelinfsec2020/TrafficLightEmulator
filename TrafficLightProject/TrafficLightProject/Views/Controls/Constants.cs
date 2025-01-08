@@ -15,6 +15,8 @@ namespace TrafficLightProject.Views.Controls
         public static readonly string SECTION_ON_RED;
         public static readonly string SECTION_ON_YELLOW;
         public static readonly string SECTION_ON_GREEN;
+        public static readonly string SECTION_ON_BLUE;
+        public static readonly Size BUTTON_CONTROL_PANEL_SIZE;
         public static readonly int GREED_WITH;
 
         static Constants()
@@ -25,6 +27,7 @@ namespace TrafficLightProject.Views.Controls
             SECTION_ON_YELLOW = RESOURCES + "SectionOnYellow.png";
             SECTION_ON_GREEN = RESOURCES + "SectionOnGreen.png";
             GREED_WITH = SECTION_WIDTH * 3;
+            BUTTON_CONTROL_PANEL_SIZE = new Size(400,40);
         }
 
         private static string GetResourcesPath()

@@ -5,7 +5,7 @@ using TrafficLightProject.Views.Controls;
 
 namespace TrafficLightProject.Views.Forms
 {
-    public partial class TrafficLightForm : Form
+    public partial class TrafficLightForm : NoResizibleForm
     {
         private TrafficLight _trafficLight;
         private TrafficLightGreed _trafficLightControl;
@@ -15,15 +15,12 @@ namespace TrafficLightProject.Views.Forms
             _trafficLight = new TrafficLight();
             _trafficLightControl = new TrafficLightGreed(_trafficLight);
             this.Controls.Add(_trafficLightControl);
-            _trafficLight.ActivateStandartMode();
         }
 
         private void TrafficLightForm_Load(object sender, EventArgs e)
         {
             var size = new Size(Constants.GREED_WITH + 10, Constants.GREED_WITH + 30);
             this.Size = size;
-            this.FormBorderStyle = FormBorderStyle.FixedDialog;
-            this.MaximizeBox = false;
         }
 
         public TrafficLight ConnectToTrafficLight (string password)

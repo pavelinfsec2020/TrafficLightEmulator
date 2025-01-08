@@ -1,3 +1,4 @@
+using TrafficLightProject.Controllers;
 using TrafficLightProject.Views.Forms;
 
 namespace TrafficLightProject
@@ -13,7 +14,11 @@ namespace TrafficLightProject
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            Application.Run(new TrafficLightForm());
+            var trafficLightForm = new TrafficLightForm();
+            //получаем ссылку на созданный в форме светофор через метод с паролем
+            var trafficLight = trafficLightForm.ConnectToTrafficLight("Qwerty123456");
+            var controller = new ControlPanelController(trafficLight);
+            Application.Run(trafficLightForm);
         }
     }
 }

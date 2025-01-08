@@ -1,6 +1,6 @@
 ﻿namespace TrafficLightProject.Views.Forms
 {
-    partial class ControlPanelForm
+    partial class NoResizibleForm
     {
         /// <summary>
         /// Required designer variable.
@@ -30,14 +30,14 @@
         {
             SuspendLayout();
             // 
-            // ControlPanelForm
+            // NoResizibleForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(541, 392);
-            Name = "ControlPanelForm";
-            Text = "Пульт управления светофором";
-            Load += ControlPanelForm_Load;
+            ClientSize = new Size(800, 450);
+            Name = "NoResizibleForm";
+            Text = "NoResizibleForm";
+            Load += NoResizibleForm_Load;
             ResumeLayout(false);
         }
 

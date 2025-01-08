@@ -84,6 +84,9 @@ namespace TrafficLightProject.Models
 
                 for (int i = 0; i < MainSections.Length; i++)
                 {
+                    if (!IsMainActivated)
+                        return;
+
                     MainSections[i].IsEnabled = true;
                     await Task.Delay(MainSections[i].TimeIntervalSeconds * 1000);
 
@@ -155,8 +158,11 @@ namespace TrafficLightProject.Models
         }
 
         public void TurnOffTrafficLight()
-        { 
-           foreach (var section in MainSections)
+        {
+            IsMainActivated = false;
+            IsTurnActivated = false;   
+
+            foreach (var section in MainSections)
                 section.IsEnabled = false;
 
             if (TurnSections.Any())
