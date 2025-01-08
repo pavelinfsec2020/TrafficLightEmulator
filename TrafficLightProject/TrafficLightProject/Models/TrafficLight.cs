@@ -52,12 +52,9 @@ namespace TrafficLightProject.Models
 
         public bool RemoveTurnSection(ArrowTurn arrow)
         {
-            if (TurnSections.Any(s => s.ArrowTurn != arrow))
-                return false;
-
             TurnSections.Remove(
                 TurnSections.FirstOrDefault(s => s.ArrowTurn == arrow));
-
+            TurnSections = TurnSections;
             IsTurnActivated = TurnSections.Any();
 
             return true;

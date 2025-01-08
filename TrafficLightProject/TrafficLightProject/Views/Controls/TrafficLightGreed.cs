@@ -33,6 +33,19 @@ namespace TrafficLightProject.Views.Controls
 
         private void RenderTurnSections()
         {
+            if (!_turnSections.Any())
+            {
+                var leftSection = this.Controls.Find("LeftSection", true).FirstOrDefault();
+
+                if (leftSection != null)
+                    this.Controls.Remove(leftSection);
+
+                var rightSection = this.Controls.Find("RightSection", true).FirstOrDefault();
+
+                if (rightSection != null)
+                    this.Controls.Remove(rightSection);
+            }
+
             foreach (var turnSectionModel in _turnSections)
             {
                 var isLeftTurn = turnSectionModel.ArrowTurn == ArrowTurn.Left;
@@ -42,7 +55,16 @@ namespace TrafficLightProject.Views.Controls
                 turnSectionView.Location = new Point(isLeftTurn ? 0 : Constants.SECTION_WIDTH * 2, Constants.SECTION_WIDTH * 2);
                 turnSectionView.DataBindings.Add("IsEnabled", turnSectionModel, "IsEnabled", true, DataSourceUpdateMode.OnPropertyChanged);
                 this.Controls.Add(turnSectionView);
-                // var controlsForRemove = this.Controls.Find();
+
+                //если после добавления остался один элемент всего, проверяем, есть ли лишний контрол на форме, если есть - удаляем его
+                if (_turnSections.Count == 1)
+                { 
+                   var controlName = isLeftTurn ? "RightSection" : "LeftSection";
+                   var controlToDelete = this.Controls.Find(controlName, true).FirstOrDefault();
+
+                    if (controlToDelete != null)
+                        this.Controls.Remove(controlToDelete);
+                }
             }
         }
 
