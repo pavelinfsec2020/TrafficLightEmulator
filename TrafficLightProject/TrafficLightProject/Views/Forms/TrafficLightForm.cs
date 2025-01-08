@@ -15,6 +15,7 @@ namespace TrafficLightProject.Views.Forms
             _trafficLight = new TrafficLight();
             _trafficLightControl = new TrafficLightGreed(_trafficLight);
             this.Controls.Add(_trafficLightControl);
+            _trafficLight.ActivateStandartMode();
         }
 
         private void TrafficLightForm_Load(object sender, EventArgs e)

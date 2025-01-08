@@ -20,12 +20,22 @@ namespace TrafficLightProject.Views.Controls
     {
         private readonly Image _offImage;
         private readonly Image _onImage;
+        private bool _isEnabled;
         public TraffickLightSection(Color color)
         {
             InitializeComponent();
             _offImage = Image.FromFile(Constants.SECTION_OFF_IMAGE);
             _onImage = GetImageFormColor(color);
-            this.BackgroundImage = _onImage;
+        }
+
+        public bool IsEnabled
+        {
+            get { return _isEnabled; }
+            set
+            {
+                _isEnabled = value;
+                this.BackgroundImage = value ? _onImage : _offImage;
+            }
         }
 
         private Image GetImageFormColor(Color color)

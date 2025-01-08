@@ -16,7 +16,6 @@ namespace TrafficLightProject.Views.Controls
     {
         private TrafficLight _trafficLight;
         private Point[,] _locations;
-        private Dictionary<MainSection, TraffickLightSection> _sectionControls;
         public TrafficLightGreed(TrafficLight trafficLight)
         {
             _trafficLight = trafficLight;
@@ -24,26 +23,28 @@ namespace TrafficLightProject.Views.Controls
             InitializeComponent();
         }
 
+        /// <summary>
+        /// MVVM Паттерн для динамического отображения секвтора в Winforms в зависимости от состояния модельки.
+        /// </summary>
         private void MatchVievAndModelSections()
         {
-            var redSection = new TraffickLightSection(Color.Red);
-            redSection.Location = new Point(Constants.SECTION_WIDTH, 0);
-            this.Controls.Add(redSection);
+            var redSectionView = new TraffickLightSection(Color.Red);
+            var redSectionModel = _trafficLight.MainSections.FirstOrDefault(s => s.Position == TrafficLightPosition.Up);
+            redSectionView.Location = new Point(Constants.SECTION_WIDTH, 0);
+            redSectionView.DataBindings.Add("IsEnabled", redSectionModel, "IsEnabled", true, DataSourceUpdateMode.OnPropertyChanged);
+            this.Controls.Add(redSectionView);
 
-            var yellowSection = new TraffickLightSection(Color.Yellow);
-            yellowSection.Location = new Point(Constants.SECTION_WIDTH, Constants.SECTION_WIDTH);
-            this.Controls.Add(yellowSection);
+            var yellowSectionView = new TraffickLightSection(Color.Yellow);
+            var yellowSectionModel = _trafficLight.MainSections.FirstOrDefault(s => s.Position == TrafficLightPosition.Middle);
+            yellowSectionView.Location = new Point(Constants.SECTION_WIDTH, Constants.SECTION_WIDTH);
+            yellowSectionView.DataBindings.Add("IsEnabled", yellowSectionModel, "IsEnabled", true, DataSourceUpdateMode.OnPropertyChanged);
+            this.Controls.Add(yellowSectionView);
 
-            var greenSection = new TraffickLightSection(Color.Green);
-            greenSection.Location = new Point(Constants.SECTION_WIDTH, Constants.SECTION_WIDTH * 2);
-            this.Controls.Add(greenSection);
-
-            _sectionControls = new Dictionary<MainSection, TraffickLightSection>()
-            {
-                { _trafficLight.MainSections.FirstOrDefault(s => s.Position == TrafficLightPosition.Up), redSection},
-                { _trafficLight.MainSections.FirstOrDefault(s => s.Position == TrafficLightPosition.Middle), yellowSection },
-                { _trafficLight.MainSections.FirstOrDefault(s => s.Position == TrafficLightPosition.Down), greenSection}
-            };
+            var greenSectionView = new TraffickLightSection(Color.Green);
+            var greenSectionModel = _trafficLight.MainSections.FirstOrDefault(s => s.Position == TrafficLightPosition.Down);
+            greenSectionView.Location = new Point(Constants.SECTION_WIDTH, Constants.SECTION_WIDTH * 2);
+            greenSectionView.DataBindings.Add("IsEnabled", greenSectionModel, "IsEnabled", true, DataSourceUpdateMode.OnPropertyChanged);
+            this.Controls.Add(greenSectionView);
         }
     }
 }

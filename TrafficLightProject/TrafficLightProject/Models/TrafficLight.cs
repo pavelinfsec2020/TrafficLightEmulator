@@ -71,24 +71,42 @@ namespace TrafficLightProject.Models
             }
         }
 
-        public void ActivateStandartMode()
+        public async void ActivateStandartMode()
         {
             TurnOffTrafficLight();
             IsMainActivated = true;
 
             while (IsMainActivated)
             {
-                var redDelay = MainSections[0].TimeIntervalSeconds * 1000;
-                var yellowDelay = MainSections[1].TimeIntervalSeconds * 1000;
-                var greenDelay = MainSections[2].TimeIntervalSeconds * 1000;
                 var blinkingDelay = 700;
 
-                // Загорается красный 
-                StartSection(0, redDelay, blinkingDelay);
-                // Загорается желтый
-                StartSection(1, yellowDelay);
-                // Загорается зеленый 
-                StartSection(2, greenDelay, blinkingDelay);
+                //красный - желтый синий поочередно загораются
+
+                for (int i = 0; i < MainSections.Length; i++)
+                {
+                    MainSections[i].IsEnabled = true;
+                    await Task.Delay(MainSections[i].TimeIntervalSeconds * 1000);
+
+                    MainSections[i].IsEnabled = false;
+                    await Task.Delay(blinkingDelay);
+
+                    //для желтого сигнала светофора мигания не нужны, он гормт всего 2 секунды
+                    if (i == 1)
+                        continue;
+
+                    MainSections[i].IsEnabled = true;
+                    await Task.Delay(blinkingDelay);
+
+                    MainSections[i].IsEnabled = false;
+                    await Task.Delay(blinkingDelay);
+                }
+
+                //опять желтый и по новому цикл с красного сигнала светофора идет
+                MainSections[1].IsEnabled = true;
+                await Task.Delay(MainSections[1].TimeIntervalSeconds * 1000);
+
+                MainSections[1].IsEnabled = false;
+                await Task.Delay(blinkingDelay);
             }
         }
 
@@ -118,7 +136,7 @@ namespace TrafficLightProject.Models
         {
             MainSections[sectionIndex].IsEnabled = true;
             await Task.Delay(mainDelay);
-
+           
             MainSections[sectionIndex].IsEnabled = false;
             await Task.Delay(blinkingDelay);
 
@@ -126,7 +144,7 @@ namespace TrafficLightProject.Models
             await Task.Delay(blinkingDelay);
 
             MainSections[sectionIndex].IsEnabled = false;
-            await Task.Delay(blinkingDelay);
+            await Task.Delay(blinkingDelay); 
         }
 
         private async void StartSection(int sectionIndex, int mainDelay)
