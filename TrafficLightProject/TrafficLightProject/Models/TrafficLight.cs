@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace TrafficLightProject.Models
 {
-    public class TrafficLight
+    public class TrafficLight : INotifyPropertyChanged
     {
+        private List<TurnSection> _turnSections;
         public TrafficLight()
         {
             TurnSections = new List<TurnSection>();
@@ -21,7 +23,20 @@ namespace TrafficLightProject.Models
         public bool IsMainActivated { get; set; }
         public bool IsTurnActivated { get; set; }
         public MainSection[] MainSections { get; set; }
-        public List<TurnSection> TurnSections { get; set; }
+        public List<TurnSection> TurnSections 
+        { 
+            get { return _turnSections; }
+            set 
+            {
+                _turnSections = value;
+                OnPropertyChanged(nameof(TurnSections)); 
+            } 
+        }
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
 
         public bool AddTurnSection(ArrowTurn arrow, int interval)
         {
@@ -29,6 +44,8 @@ namespace TrafficLightProject.Models
                 return false;
 
             TurnSections.Add(new TurnSection(interval, arrow));
+           //Делаю лишнее присвоение для принудительного вызова set свойства, так как привязка databinding настроена с ее представлением.
+            TurnSections = TurnSections;
 
             return true;
         }

@@ -28,11 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Height = Constants.GREED_WITH;
-            this.Width = Constants.GREED_WITH;
-            this.BackColor = System.Drawing.Color.AliceBlue;
+            SuspendLayout();
+            // 
+            // TrafficLightGreed
+            // 
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.AliceBlue;
+            Name = "TrafficLightGreed";
+            Size = new Size(315, 315);
+            ResumeLayout(false);
         }
 
         #endregion

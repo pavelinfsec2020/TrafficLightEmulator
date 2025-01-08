@@ -24,7 +24,9 @@ namespace TrafficLightProject.Views.Forms
              {
                  new Button { Text = "Активировать режим Нон-Стоп", Size = _buttonSize},
                  new Button { Text = "Активировать стандартный режим", Size = _buttonSize, Location = new Point(0, _buttonSize.Height)},
-                 new Button { Text = "Выключить светофор", Size = _buttonSize, Location = new Point(0, _buttonSize.Height * 2)}
+                 new Button { Text = "Выключить светофор", Size = _buttonSize, Location = new Point(0, _buttonSize.Height * 2)},
+                 new Button { Text = "Добавить секцию слева", Size = _buttonSize, Location = new Point(0, _buttonSize.Height * 3)},
+                 new Button { Text = "Добавить секцию справа", Size = _buttonSize, Location = new Point(0, _buttonSize.Height * 4)}
              };
 
             foreach (var button in _buttons)

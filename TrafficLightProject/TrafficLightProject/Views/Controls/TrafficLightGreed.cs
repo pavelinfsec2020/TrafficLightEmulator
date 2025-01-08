@@ -16,11 +16,27 @@ namespace TrafficLightProject.Views.Controls
     {
         private TrafficLight _trafficLight;
         private Point[,] _locations;
+        private List<TurnSection> _turnSections;
         public TrafficLightGreed(TrafficLight trafficLight)
         {
             _trafficLight = trafficLight;
+            this.DataBindings.Add("TurnSections", _trafficLight, "TurnSections", true, DataSourceUpdateMode.OnPropertyChanged);
             MatchVievAndModelSections();
             InitializeComponent();
+        }
+
+        public List<TurnSection> TurnSections
+        { 
+           get { return _turnSections; }
+            set { _turnSections = value; RenderTurnSections(); }
+        }
+
+        private void RenderTurnSections()
+        {
+            var yellowSectionView1 = new TraffickLightSection(Color.Yellow);
+            yellowSectionView1.Location = new Point(0, Constants.SECTION_WIDTH * 2);
+            yellowSectionView1.DataBindings.Add("IsEnabled", yellowSectionView1, "IsEnabled", true, DataSourceUpdateMode.OnPropertyChanged);
+            this.Controls.Add(yellowSectionView1);
         }
 
         /// <summary>
