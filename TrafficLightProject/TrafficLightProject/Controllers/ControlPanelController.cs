@@ -41,6 +41,26 @@ namespace TrafficLightProject.Controllers
                 _trafficLight.AddTurnSection(ArrowTurn.Right, 5);
             };
 
+            form._buttons[5].Click += (s, e) =>
+            {
+                _trafficLight.RemoveTurnSection(ArrowTurn.Left);
+            };
+
+            form._buttons[6].Click += (s, e) =>
+            {
+                _trafficLight.RemoveTurnSection(ArrowTurn.Right);
+            };
+
+            form._buttons[7].Click += (s, e) =>
+            {
+                _trafficLight.ActivateTurnSection();
+            };
+
+            form._buttons[8].Click += (s, e) =>
+            {
+                _trafficLight.IsTurnActivated = false;
+            };
+
             form.Show();
         }
     }

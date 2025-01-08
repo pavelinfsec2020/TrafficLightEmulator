@@ -31,7 +31,7 @@ namespace TrafficLightProject.Views.Controls
             GREED_WITH = SECTION_WIDTH * 3;
             BUTTON_CONTROL_PANEL_SIZE = new Size(400,40);
             SECTION_TURN_LEFT = Image.FromFile(RESOURCES + "SectionTurnLeft.png");
-            SECTION_TURN_LEFT = Image.FromFile(RESOURCES + "SectionTurnRight.png");
+            SECTION_TURN_RIGHT = Image.FromFile(RESOURCES + "SectionTurnRight.png");
         }
 
         private static string GetResourcesPath()

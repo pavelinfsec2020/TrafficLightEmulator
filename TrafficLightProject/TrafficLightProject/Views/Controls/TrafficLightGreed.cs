@@ -26,8 +26,8 @@ namespace TrafficLightProject.Views.Controls
         }
 
         public List<TurnSection> TurnSections
-        { 
-           get { return _turnSections; }
+        {
+            get { return _turnSections; }
             set { _turnSections = value; RenderTurnSections(); }
         }
 
@@ -38,9 +38,11 @@ namespace TrafficLightProject.Views.Controls
                 var isLeftTurn = turnSectionModel.ArrowTurn == ArrowTurn.Left;
                 var turnSectionView = new TraffickLightSection(isLeftTurn ? Color.Green_Left_Arrow :
                                                                             Color.Green_Right_Arrow);
-                turnSectionView.Location = new Point( isLeftTurn ? 0:  Constants.SECTION_WIDTH * 2, Constants.SECTION_WIDTH * 2);
-                turnSectionView.DataBindings.Add("IsEnabled", turnSectionView, "IsEnabled", true, DataSourceUpdateMode.OnPropertyChanged);
+                turnSectionView.Name = isLeftTurn ? "LeftSection" : "RightSection";
+                turnSectionView.Location = new Point(isLeftTurn ? 0 : Constants.SECTION_WIDTH * 2, Constants.SECTION_WIDTH * 2);
+                turnSectionView.DataBindings.Add("IsEnabled", turnSectionModel, "IsEnabled", true, DataSourceUpdateMode.OnPropertyChanged);
                 this.Controls.Add(turnSectionView);
+                // var controlsForRemove = this.Controls.Find();
             }
         }
 

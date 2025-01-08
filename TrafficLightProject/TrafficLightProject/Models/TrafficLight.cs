@@ -58,6 +58,8 @@ namespace TrafficLightProject.Models
             TurnSections.Remove(
                 TurnSections.FirstOrDefault(s => s.ArrowTurn == arrow));
 
+            IsTurnActivated = TurnSections.Any();
+
             return true;
         }
 
@@ -132,7 +134,7 @@ namespace TrafficLightProject.Models
 
         public async Task<bool> ActivateTurnSection()
         {
-            if (TurnSections.Any()) 
+            if (!TurnSections.Any()) 
                 return false;
            
             IsTurnActivated = true;
@@ -142,9 +144,9 @@ namespace TrafficLightProject.Models
                 foreach (var section in TurnSections)
                 {
                     section.IsEnabled = true;
-                    await Task.Delay(section.TimeIntervalSeconds * 1000);
-                    section.IsEnabled = true;
+                    await Task.Delay(section.TimeIntervalSeconds * 1000);              
                     var turnDelay = (MainSections[0].TimeIntervalSeconds * 1000 ) / 2;
+                    section.IsEnabled = false;
                     await Task.Delay(turnDelay);
                 }
             }
