@@ -135,21 +135,6 @@ namespace TrafficLightProject.Models
             return true;
         }
 
-        private async void StartSection(int sectionIndex,int mainDelay, int blinkingDelay)
-        {
-            MainSections[sectionIndex].IsEnabled = true;
-            await Task.Delay(mainDelay);
-           
-            MainSections[sectionIndex].IsEnabled = false;
-            await Task.Delay(blinkingDelay);
-
-            MainSections[sectionIndex].IsEnabled = true;
-            await Task.Delay(blinkingDelay);
-
-            MainSections[sectionIndex].IsEnabled = false;
-            await Task.Delay(blinkingDelay); 
-        }
-
         private async void StartSection(int sectionIndex, int mainDelay)
         {
             MainSections[sectionIndex].IsEnabled = true;
